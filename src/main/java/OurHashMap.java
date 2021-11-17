@@ -1,15 +1,15 @@
 import java.sql.Array;
 import java.util.*;
 
-public class OurHashMap implements Map {
+public class OurHashMap<K,V> implements Map<K,V> {
 
     private final int SIZE = 16;
 
     class Entry {
-        Object key;
-        Object value;
+        K key;
+        V value;
 
-        public Entry(Object key, Object value) {
+        public Entry(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -38,7 +38,7 @@ public class OurHashMap implements Map {
     }
 
     @Override
-    public Object get(Object key) {
+    public V get(Object key) {
         int hashcode = key.hashCode();
         int index = Math.abs(hashcode) % SIZE;
         List<Entry> list = values[index];
@@ -54,7 +54,7 @@ public class OurHashMap implements Map {
     }
 
     @Override
-    public Object put(Object key, Object value) {
+    public V put(K key, V value) {
         int hashcode = key.hashCode();
         int index = Math.abs(hashcode) % SIZE;
         Entry entry = new Entry(key,value);
@@ -63,12 +63,15 @@ public class OurHashMap implements Map {
             list = new ArrayList<Entry>();
             values[index] = list;
         }
+
         list.add(entry);
+
+        // return overwritten value
         return null;
     }
 
     @Override
-    public Object remove(Object key) {
+    public V remove(Object key) {
         return null;
     }
 
@@ -93,7 +96,7 @@ public class OurHashMap implements Map {
     }
 
     @Override
-    public Set<Entry> entrySet() {
+    public Set<java.util.Map.Entry<K,V>> entrySet() {
         return null;
     }
 }

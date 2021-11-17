@@ -7,7 +7,7 @@ class OurHashMapTest {
     @Test
     void getNull() {
         // given
-        OurHashMap map = new OurHashMap();
+        OurHashMap<String,String> map = new OurHashMap<>();
 
         // when
 
@@ -18,7 +18,7 @@ class OurHashMapTest {
     @Test
     void put() {
         // given
-        OurHashMap map = new OurHashMap();
+        OurHashMap<String,String> map = new OurHashMap<>();
 
         // when
         map.put("ENGLISH1", "HELLO");
@@ -41,5 +41,18 @@ class OurHashMapTest {
         assertEquals("PRIVIT", map.get("RUSSIAN"));
         assertEquals("NE HOW", map.get("JAPANESE"));
         assertEquals("CONICHIWA", map.get("MANDARIN"));
+    }
+
+    @Test
+    void putSameKeys() {
+        // given
+        OurHashMap<String,String> map = new OurHashMap<>();
+
+        // when
+        map.put("ENGLISH1", "HELLO");
+        map.put("ENGLISH1", "HI");
+
+        // then
+        assertEquals("HI", map.get("ENGLISH1"));
     }
 }
