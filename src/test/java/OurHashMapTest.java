@@ -5,8 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class OurHashMapTest {
 
     @Test
-    void get() {
+    void getNull() {
+        // given
+        OurHashMap map = new OurHashMap();
 
+        // when
+
+        // then
+        assertNull(map.get("ENGLISH1"));
     }
 
     @Test
@@ -26,6 +32,14 @@ class OurHashMapTest {
         map.put("MANDARIN", "CONICHIWA");
 
         // then
-        assertEquals("HELLO", map.values[Math.abs("ENGLISH1".hashCode()) % 1024]);
+        assertEquals("HELLO", map.get("ENGLISH1"));
+        assertEquals("HI", map.get("ENGLISH2"));
+        assertEquals("HEY", map.get("ENGLISH3"));
+        assertEquals("HOLA", map.get("SPANISH"));
+        assertEquals("SHALOM", map.get("HEBREW"));
+        assertEquals("BONJOUR", map.get("FRENCH"));
+        assertEquals("PRIVIT", map.get("RUSSIAN"));
+        assertEquals("NE HOW", map.get("JAPANESE"));
+        assertEquals("CONICHIWA", map.get("MANDARIN"));
     }
 }
