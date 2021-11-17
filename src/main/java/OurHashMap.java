@@ -5,7 +5,7 @@ public class OurHashMap<K,V> implements Map<K,V> {
 
     private final int SIZE = 16;
 
-    class Entry {
+    class Entry<K,V> {
         K key;
         V value;
 
@@ -47,7 +47,7 @@ public class OurHashMap<K,V> implements Map<K,V> {
         }
         for (Entry entry : list) {
             if (entry.key.equals(key)) {
-                return entry.value;
+                return (V) entry.value;
             }
         }
         return null;
@@ -57,16 +57,23 @@ public class OurHashMap<K,V> implements Map<K,V> {
     public V put(K key, V value) {
         int hashcode = key.hashCode();
         int index = Math.abs(hashcode) % SIZE;
-        Entry entry = new Entry(key,value);
         List list = values[index];
         if (list == null) {
             list = new ArrayList<Entry>();
             values[index] = list;
         }
 
+        for (Entry<K,V> entry : (List<Entry<K,V>>) list) {
+            if (entry.key.equals(key)) {
+                V saved = entry.value;
+                entry.value = value;
+                return saved;
+            }
+        }
+
+        Entry entry = new Entry(key,value);
         list.add(entry);
 
-        // return overwritten value
         return null;
     }
 

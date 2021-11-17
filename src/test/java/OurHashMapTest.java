@@ -50,6 +50,9 @@ class OurHashMapTest {
 
         // when
         map.put("ENGLISH1", "HELLO");
+        map.put("SPANISH", "HOLA");
+        map.put("HEBREW", "SHALOM");
+        map.put("FRENCH", "BONJOUR");
         map.put("ENGLISH1", "HI");
 
         // then
